@@ -47,6 +47,8 @@ void	recieve_message(char *message, int signal_num, int *message_size)
 
 	if (current_bit == 0 && flag == 0)
 	{
+		*message_size = *message_size - 1;
+		message[*message_size] = 0;
 		current_bit = 7;
 		flag++;
 	}
@@ -57,6 +59,7 @@ void	recieve_message(char *message, int signal_num, int *message_size)
 		if (current_bit < 0)
 		{
 			*message_size = *message_size - 1;
+			message[*message_size] = 0; //Figure out how can you add bzero/calloc functionality.
 			current_bit = 7;
 		}
 	}
@@ -91,6 +94,7 @@ void	user_message(int signal_num)
 		message_size = (int *)malloc(sizeof(int));
 		if (!message_size)
 			exit(EXIT_FAILURE);
+		*message_size = 0;
 		size_bp = 31;
 	}
 	if (size_bp >= 0 && (signal_num == SIGUSR1 || signal_num == SIGUSR2))
@@ -99,11 +103,10 @@ void	user_message(int signal_num)
 		recieve_message(message, signal_num, message_size);
 	if (size_bp == -1 && !message)
 	{
+		size_bp--;
 		message = (char *)malloc(sizeof(char) * ((*message_size)));
 		if (!message)
 			exit(EXIT_FAILURE);
-		message[*message_size] = '\0';
-		*message_size = *message_size - 1;
 	}
 	if (message != NULL && *message_size < 0)
 		print_and_reset(&message, &message_size);
