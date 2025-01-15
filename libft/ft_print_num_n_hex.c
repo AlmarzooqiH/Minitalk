@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_num_n_hex.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbyte <hbyte@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 19:07:18 by hamalmar          #+#    #+#             */
-/*   Updated: 2024/05/13 22:37:17 by hbyte            ###   ########.fr       */
+/*   Updated: 2024/06/30 10:33:53 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_print_num_n_hex(unsigned int n, char casing)
 {

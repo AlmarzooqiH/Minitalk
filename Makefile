@@ -1,42 +1,42 @@
-COMPILER = gcc
+COMPILER = cc
 FLAGS = -Wall -Werror -Wextra
-DEBUG_FLAGS = -fsanitize=address,undefined -Werror=address -Wnull-dereference -g
+DEBUG_FLAGS = -fsanitize=address,undefined -Werror=address -Wnull-dereference -g3
 SERVER = server.c
 SERVER_OBJECTS = $(SERVER:.c=.o)
 CLIENT = client.c
 CLIENT_OBJECTS = $(CLIENT:.c=.o)
-FT_PRINTF_LIBFT_A = ft_printf/libftprintf.a
+LIBFT_A = libft/libft.a
 
-all: ft_printf ft_client ft_server 
+all: libft ft_client ft_server 
 
 ft_client: $(CLIENT_OBJECTS)
-	$(COMPILER) $(FLAGS) $(CLIENT_OBJECTS) $(FT_PRINTF_LIBFT_A) -o client
+	$(COMPILER) $(FLAGS) $(CLIENT_OBJECTS) $(LIBFT_A) -o client
 
 ft_server: $(SERVER_OBJECTS)
-	$(COMPILER) $(FLAGS) $(SERVER_OBJECTS) $(FT_PRINTF_LIBFT_A) -o server
+	$(COMPILER) $(FLAGS) $(SERVER_OBJECTS) $(LIBFT_A) -o server
 
-debug: fclean ft_printf $(CLIENT_OBJECTS) $(SERVER_OBJECTS)
-		$(COMPILER) $(FLAGS) $(DEBUG_FLAGS) $(CLIENT_OBJECTS) $(FT_PRINTF_LIBFT_A) -o client
-		$(COMPILER) $(FLAGS) $(DEBUG_FLAGS) $(SERVER_OBJECTS) $(FT_PRINTF_LIBFT_A) -o server
+debug: fclean libft $(CLIENT_OBJECTS) $(SERVER_OBJECTS)
+		$(COMPILER) $(FLAGS) $(DEBUG_FLAGS) $(CLIENT_OBJECTS) $(LIBFT_A) -o client
+		$(COMPILER) $(FLAGS) $(DEBUG_FLAGS) $(SERVER_OBJECTS) $(LIBFT_A) -o server
 
 
-ft_printf:
-	cd ft_printf ; make
+libft:
+	cd libft ; make
 
-ft_printf_clean:
-	cd ft_printf ; make clean
+libft_clean:
+	cd libft ; make clean
 
-ft_printf_fclean:
-	cd ft_printf ; make fclean
+libft_fclean:
+	cd libft ; make fclean
 
-ft_printf_re:
-	cd ft_printf ; make re
+libft_re:
+	cd libft ; make re
 
-clean: ft_printf_clean
+clean: libft_clean
 	rm -rf *.o *.out *.gch server client .vscode
 
-fclean: clean ft_printf_fclean
+fclean: clean libft_fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re ft_client ft_server ft_printf ft_printf_clean ft_printf_fclean ft_printf_re
+.PHONY: all clean fclean re ft_client ft_server libft libft_clean libft_fclean libft_re

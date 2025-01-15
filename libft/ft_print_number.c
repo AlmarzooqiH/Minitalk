@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned_num.c                            :+:      :+:    :+:   */
+/*   ft_print_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbyte <hbyte@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 19:11:18 by hamalmar          #+#    #+#             */
-/*   Updated: 2024/05/13 22:37:14 by hbyte            ###   ########.fr       */
+/*   Created: 2023/12/07 19:06:28 by hamalmar          #+#    #+#             */
+/*   Updated: 2024/06/30 10:35:09 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_print_unsigned_num(unsigned int n)
+int	ft_print_number(int n)
 {
 	char	current_digit;
 
-	if (n <= 9)
+	if (n == -2147483648)
+	{
+		return (write(1, "-2147483648", 11));
+	}
+	if (n < 0)
+		return (write(1, "-", 1) + ft_print_number(-n));
+	if (n >= 0 && n <= 9)
 	{
 		current_digit = n + '0';
 		return (write(1, &current_digit, 1));
